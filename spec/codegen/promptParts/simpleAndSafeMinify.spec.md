@@ -1,5 +1,6 @@
 ---
 type: javascript function
+namespace: codegen.promptParts
 ---
 Given two string parameters 
 - inData : containing the code, which needs to be minified 
