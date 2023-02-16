@@ -1,0 +1,19 @@
+{
+  "name": "dumb-twitter-demo",
+  "version": "1.0.0",
+  "description": "A simple english spec to code demo, implementing twitter locally",
+  "main": "src/server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha \\\"./test/**/*.test.js\\\" --exit"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "sqlite3": "^5.1.4"
+  }
+}
