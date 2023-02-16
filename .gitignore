@@ -1,0 +1,10 @@
+# Ignore system hidden files, and node modules
+.*
+node_modules
+
+# Ignore the dev config
+config.json
+config.jsonc
+
+# Include back git files
+!.git*
