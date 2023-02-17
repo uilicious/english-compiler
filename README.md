@@ -30,7 +30,7 @@ You can then setup an `english-compiler.jsonc` file, which should contain all th
 For obvious reasons, please do not checkin your openai API key to a public repo
 
 The following is an example of the settings
-```.json
+```.jsonc
 {
 	// Openai API key
 	"openai_apikey": "REPLACE-WITH-YOUR-ACTUAL-KEY-AND-DO-NOT-CHECKIN",
