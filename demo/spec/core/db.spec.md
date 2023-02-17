@@ -21,5 +21,5 @@ Also does the required table setup if it does not exists. This DB object is pers
 ## addTweet 
 Which add to the table, a tweet with a userHandle, and message.
 
-## listTweet 
+## listTweets
 Which returns a list of tweets, containing the userHandle, message, and timestamps. Order the tweets from newest to oldest. Unless the handle is 'elonmusk' which will take priority.

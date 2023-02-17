@@ -4,7 +4,7 @@ type: html file
 HTML website. Which is a twitter clone.
 Include inline CSS styling.
 
-It calls the server `/api/listTweet` (without's) to get the list of tweets from the "result" parameter.
+It calls the server `/api/listTweets` to get the list of tweets from the "result" parameter.
 Each tweet contains the following 
 - userHandle
 - message
