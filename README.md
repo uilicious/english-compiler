@@ -14,7 +14,7 @@ So what if, instead of writing code from functional specs, we simply compile it 
 
 For more details, see the 3 minute youtube presentation
 
-[![The English Compiler : in 3 minutes]](https://img.youtube.com/vi/hdPG-avfpZo/maxresdefault.jpg)](https://www.youtube.com/watch?v=hdPG-avfpZo)
+[![The English Compiler : in 3 minutes](https://img.youtube.com/vi/hdPG-avfpZo/maxresdefault.jpg)](https://www.youtube.com/watch?v=hdPG-avfpZo)
 
 # How do I install it?
 
