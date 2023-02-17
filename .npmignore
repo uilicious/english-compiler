@@ -1,0 +1,9 @@
+bin/
+dist-repos/
+node_modules/
+.git/
+.*
+notes/
+demo/
+config.jsonc
+*.jsonc

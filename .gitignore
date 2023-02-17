@@ -8,3 +8,5 @@ config.jsonc
 
 # Include back git files
 !.git*
+# Add back npmignore
+!.npmignore
