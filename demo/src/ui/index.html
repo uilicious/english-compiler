@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twitter Clone</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      .tweet {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      .tweet-user {
+        font-weight: bold;
+      }
+      .tweet-message {
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Twitter Clone</h1>
+    <div id="tweets"></div>
+    <form id="tweetForm">
+      <input type="text" name="userHandle" placeholder="User Handle" />
+      <input type="text" name="message" placeholder="Message" />
+      <button type="submit">Send</button>
+    </form>
+    <script>
+      const tweetsEl = document.getElementById('tweets');
+      const tweetFormEl = document.getElementById('tweetForm');
+
+      // Get tweets
+      const getTweets = async () => {
+        const response = await fetch('/api/listTweets');
+        const { result } = await response.json();
+        tweetsEl.innerHTML = result
+          .map(
+            ({ userHandle, message, timestamp }) => `
+            <div class="tweet">
+              <div class="tweet-user">${userHandle}</div>
+              <div class="tweet-message">${message}</div>
+              <div class="tweet-timestamp">${timestamp}</div>
+            </div>
+          `
+          )
+          .join('');
+      };
+
+      // Post tweet
+      const postTweet = async (userHandle, message) => {
+        const response = await fetch('/api/addTweet', {
+          method: 'POST',
+          body: JSON.stringify({ userHandle, message }),
+        });
+        const { result } = await response.json();
+        if (result === 'success') {
+          getTweets();
+        }
+      };
+
+      // On submit
+      tweetFormEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userHandle = e.target.userHandle.value;
+        const message = e.target.message.value;
+        if (userHandle && message) {
+          postTweet(userHandle, message);
+        }
+      });
+
+      // Get tweets on page load
+      getTweets();
+    </script>
+  </body>
+</html>
