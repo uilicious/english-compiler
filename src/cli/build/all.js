@@ -13,7 +13,9 @@ const fs = require("fs");
 const markdownSpecFileToCode = require("../../codegen/markdownSpecFileToCode");
 const path = require("path");
 const config = require("../../core/config");
-const scanDirForFiles = require("../../util/scanDirForFiles")
+const scanDirForFiles = require("../../util/scanDirForFiles");
+const fileExist = require("../../util/fileExist");
+const personalityRemark = require("../../codegen/personalityRemark");
 
 //---------------------------------------------------
 //
@@ -34,13 +36,25 @@ module.exports = {
 	// Execute the run command
 	run: async (argv, context) => {
 		try {
-			OutputHandler.standardGreen("### ---")
-			OutputHandler.standardGreen("### Generating code from spec dir ... ")
-			OutputHandler.standardGreen("### "+config.spec_dir);
-			OutputHandler.standardGreen("### ---")
-
+			OutputHandler.standardGreen(`[System] Generating code from spec dir : ${config.spec_dir}`)
+			
             const scanList = await scanDirForFiles(config.spec_dir, [/^.*\.spec\.md$/]);
-			console.log(scanList);
+			
+			if( scanList.length == 0 ) {
+				OutputHandler.fatalError(`No specification files found in spec_dir : ${config.spec_dir}`, 44);
+				return;
+			}
+
+			let personalityFile = null;
+			if( config.personality ) {
+				let personalityFile = path.resolve(config.spec_dir, "README.md");
+				if( (await fileExist( personalityFile )) == false ) {
+					personalityFile = scanList[0];
+				}
+				const remark = await personalityRemark(personalityFile, config.personality, "Building everything according to the spec");
+				OutputHandler.standardGreen(`[AI Remark] ${remark}`)
+			}
+
 			for(const specFile of scanList) {
 
 				const fullpath = await getSpecFile(specFile);
@@ -56,7 +70,7 @@ module.exports = {
 				// We remove the last trailing .spec from the filename, as that is not part of the "filetype"
 				const subPath = relativePathParse.dir + "/" +relativePathParse.name.split(".").slice(0,-1).join(".");
 
-				OutputHandler.standard("### Generating code from spec file: " + fullpath);
+				OutputHandler.standard("[AI Working] Generating code from spec file: " + fullpath);
 
 				// Generate the code
 				const generatedCode = await markdownSpecFileToCode(fullpath);
@@ -78,21 +92,30 @@ module.exports = {
 				}
 
 				// // Lets write the file accordingly
-				OutputHandler.standard("### Writing source file :"+codeFilePath);
+				OutputHandler.standard("[System] Writing source file :"+codeFilePath);
 				await fs.promises.mkdir( path.dirname(codeFilePath), { recursive: true } );
 				await fs.promises.writeFile(codeFilePath, generatedCode.code, "utf8");
 				
 				if( generatedCode.test ) {
-					OutputHandler.standard("### Writing test file :"+testFilePath);
+					OutputHandler.standard("[System] Writing test file :"+testFilePath);
 					await fs.promises.mkdir( path.dirname(testFilePath), { recursive: true } );
 					await fs.promises.writeFile(testFilePath, generatedCode.test, "utf8");
 				}
 
 			}
-			OutputHandler.standardGreen("### ---")
-			OutputHandler.standardGreen("### Completed build for spec dir ... ")
-			OutputHandler.standardGreen("### "+config.spec_dir);
-			OutputHandler.standardGreen("### ---")
+			
+			if( config.personality ) {
+				let personalityFile = path.resolve(config.spec_dir, "README.md");
+				if( (await fileExist( personalityFile )) == false ) {
+					personalityFile = scanList[0];
+				}
+				const remark = await personalityRemark(personalityFile, config.personality, "Completing the build process");
+
+				OutputHandler.standardGreen("[System] Completed build for spec dir")
+				OutputHandler.standardGreen(`[AI Remark] ${remark}`)
+			} else {
+				OutputHandler.standardGreen("[System] Completed build for spec dir")
+			}
 		} catch(err) {
 			OutputHandler.fatalError(err, 51);
 		}

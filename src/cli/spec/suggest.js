@@ -11,7 +11,9 @@ const inquirer = require('inquirer');
 const markdownSpecFileChangeWithFeedback = require("../../codegen/markdownSpecFileChangeWithFeedback");
 const getMarkdownObj = require("../../util/getMarkdownObj");
 const diff = require("diff")
-const fs = require("fs")
+const fs = require("fs");
+const config = require("../../core/config");
+const personalityRemark = require("../../codegen/personalityRemark");
 
 //---------------------------------------------------
 //
@@ -40,26 +42,28 @@ module.exports = {
 				return;
 			}
 			
-			OutputHandler.standardGreen("### ---")
-			OutputHandler.standardGreen("### Generating AI suggestions for spec file ... ")
-			OutputHandler.standardGreen("### "+fullpath);
-			OutputHandler.standardGreen("### ---")
+			OutputHandler.standardGreen("[System] Generating AI suggestions for spec file : "+fullpath)
 			
 			const suggestion = await markdownSpecFileSuggestion( fullpath );
-			OutputHandler.standard(suggestion);
+			OutputHandler.standard(`[AI Suggestions]\n${suggestion}`);
 			
-			OutputHandler.standardGreen("### ---")
-			OutputHandler.standardGreen("### Please provide instructions, on what changes would you like ... ")
-			OutputHandler.standardGreen("### ---")
+			if( config.personality ) {
+				const remark = await personalityRemark(fullpath, config.personality, "Awaiting for instructions, on how to improve the spec file");
+				OutputHandler.standardGreen(`[AI Remark] ${remark}`)
+			}
+			OutputHandler.standardGreen("[System] Please provide instructions, on what changes would you like ... ")
 			
 			const promptRes = await inquirer.prompt([
 				{ name:"instruction", default: "Apply all the suggested changes" }
 			]);
 
 			const instruction = promptRes.instruction;
-			OutputHandler.standardGreen("### ---")
-			OutputHandler.standardGreen("### Computing changes ... ")
-			OutputHandler.standardGreen("### ---")
+
+			OutputHandler.standardGreen("[System] Computing changes ... ")
+			if( config.personality ) {
+				const remark = await personalityRemark(fullpath, config.personality, `Comment on the following instructions provided '${instruction}'`);
+				OutputHandler.standardGreen(`[AI Remark] ${remark}`)
+			} 
 			
 			const originalMd = await getMarkdownObj( fullpath );
 			const updatedSpec = await markdownSpecFileChangeWithFeedback( fullpath, suggestion, instruction );
@@ -75,13 +79,16 @@ module.exports = {
 				}
 			}
 
-			OutputHandler.standardGreen("### ---")
-			OutputHandler.standardGreen("### Would you like to apply the above changes? ")
-			OutputHandler.standardGreen("### ---")
+			OutputHandler.standardGreen("[System] Would you like to apply the above changes? ")
 			
 			const confirmRes = (await inquirer.prompt([
 				{ name:"apply", default:false, type:"confirm" }
 			])).apply;
+
+			if( config.personality ) {
+				const remark = await personalityRemark(fullpath, config.personality, `Provide commentry, about completing '${instruction}'`);
+				OutputHandler.standardGreen(`[AI Remark] ${remark}`)
+			} 
 
 			if( confirmRes ) {
 				await fs.promises.writeFile( fullpath, originalMd.frontmatter+updatedSpec );

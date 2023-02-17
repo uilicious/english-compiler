@@ -13,6 +13,7 @@ const fs = require("fs");
 const markdownSpecFileToCode = require("../../codegen/markdownSpecFileToCode");
 const path = require("path");
 const config = require("../../core/config");
+const personalityRemark = require("../../codegen/personalityRemark");
 
 //---------------------------------------------------
 //
@@ -47,12 +48,12 @@ module.exports = {
 			const relativePathParse = path.parse(relativePath);
 			// We remove the last trailing .spec from the filename, as that is not part of the "filetype"
 			const subPath = relativePathParse.dir + "/" +relativePathParse.name.split(".").slice(0,-1).join(".");
-			console.log( subPath );
 
-			OutputHandler.standardGreen("### ---")
-			OutputHandler.standardGreen("### Generating code from spec file ... ")
-			OutputHandler.standardGreen("### "+fullpath);
-			OutputHandler.standardGreen("### ---")
+			OutputHandler.standardGreen(`[System] Generating code from spec file: ${fullpath}`)
+			if( config.personality ) {
+				const remark = await personalityRemark(fullpath, config.personality, "Building a single code file");
+				OutputHandler.standardGreen(`[AI Remark] ${remark}`)
+			}
 
 			// Generate the code
 			const generatedCode = await markdownSpecFileToCode(fullpath);
@@ -74,18 +75,20 @@ module.exports = {
 			}
 
 			// Lets write the file accordingly
-			OutputHandler.standardGreen("### Writing source file :"+codeFilePath);
-			OutputHandler.standardGreen("### ---");
+			OutputHandler.standardGreen("[AI] Writing source file :"+codeFilePath);
 			await fs.promises.mkdir( path.dirname(codeFilePath), { recursive: true } );
 			await fs.promises.writeFile(codeFilePath, generatedCode.code, "utf8");
             
 			if( generatedCode.test ) {
-				OutputHandler.standardGreen("### Writing test file :"+testFilePath);
-				OutputHandler.standardGreen("### ---");
+				OutputHandler.standardGreen("[AI] Writing test file :"+testFilePath);
 				await fs.promises.mkdir( path.dirname(testFilePath), { recursive: true } );
 				await fs.promises.writeFile(testFilePath, generatedCode.test, "utf8");
 			}
 
+			if( config.personality ) {
+				const remark = await personalityRemark(fullpath, config.personality, "Complete building a single code file");
+				OutputHandler.standardGreen(`[AI Remark] ${remark}`)
+			}
 		} catch(err) {
 			OutputHandler.fatalError(err, 51);
 		}
