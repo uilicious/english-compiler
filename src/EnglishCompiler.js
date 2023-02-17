@@ -44,24 +44,16 @@ MainSywac.command("build <subcommand> <args>", {
 //
 //----------------------------------------------------
 
-// MainSywac.example("$0 --key <access-key> project run 'Project-Awesome' 'suite/test-all'", {
-// 	desc: "Runs a test file in the given project name"
-// });
-// MainSywac.example("$0 --key <access-key> project run 'Project-Awesome' 'suite/test-all' --browser firefox --width 1080 --height 720 ", {
-// 	desc: "Runs with a custom browser (firefox), width and height instead" // https://user.uilicious.com/profile/accessKeys
-// })
-// MainSywac.example("$0 --user <your-awesome-email@not-evil-corp.com> --pass <super-secure-password> run 'Project-Awesome' 'suite/test-all'", {
-// 	desc: "Runs a test using your login email and password instead (please use --key instead)"
-// });
-// MainSywac.example("$0 --key <access-key> project upload 'Project-Delta' ./delta/ui-test/", {
-// 	desc: "Upload a folder of files, into the uilicious project, overwrite any existing files"
-// });
-// MainSywac.example("$0 --key <access-key> project download 'Project-Gamma' ./gamma/ui-test/", {
-// 	desc: "Download a ulicious project into a folder, overwrite any existing files"
-// });
-// MainSywac.example("$0 --apiHost https://<hostname>/<subpath-if-present>/api/v3.0/' <command>", {
-// 	desc: "[Enterprise only] Using the CLI with your dedicated instance of uilicious"
-// });
+MainSywac.example("$0 spec suggest spec/OAuth2ProviderHelper", {
+	desc: "Ask the AI, on suggestions for how to improve the specifications. And instruct it to make changes (if you like)"
+});
+MainSywac.example("$0 build file spec/core/db.spec.md ", {
+	desc: "Builds a single specification file into code (can take over 10 minutes, depending on file size and complexity)"
+})
+MainSywac.example("$0 build all", {
+	desc: "Scans the currently configured spec folder, for all the spec files - and build it"
+});
+
 
 //-------------------------------------
 //
