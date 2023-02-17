@@ -5,6 +5,8 @@ Which is typically written in [English](https://esolangs.org/wiki/English), or i
 
 So what if, instead of writing code from functional specs, we simply compile it directly to code?
 
+Into a future, where we replace nearly everything, with just written text.
+
 ![CLI help docs for the english](./notes/imgs/EnglishCommand-CLI-help.png)
 
 ![Example of spec to code](./notes/imgs/example-spec-to-code.png)
