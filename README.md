@@ -36,7 +36,7 @@ The following is an example of the settings
 	"openai_apikey": "REPLACE-WITH-YOUR-ACTUAL-KEY-AND-DO-NOT-CHECKIN",
 
 	// Prompt caching dir, this can be used to cache and speed up the build process
-    // especially when no specification (or code) changes occured
+	// especially when no specification (or code) changes occured
 	"prompt_cache_dir": "./prompt_cache",
 
 	// Specification directory, to scan for `*.spec.md` files
@@ -49,7 +49,7 @@ The following is an example of the settings
 	"test_dir": "./test",
 
 	// Add some personality based remarks, set to false/null if you want to skip this
-    // and save on token consumption (this feature is just for fun)
+	// and save on token consumption (this feature is just for fun)
 	"personality": "Sassy & Sarcastic"
 }
 ```
