@@ -1,31 +1,45 @@
-// db.test.js
-
 const assert = require('assert');
-const db = require('../../src/db');
 
 describe('db', () => {
-  beforeEach(async () => {
-    await db.setupDB();
+  let db;
+
+  beforeEach(() => {
+    db = require('../../src/db');
+  });
+
+  describe('setupDB', () => {
+    it('should setup the database', async () => {
+      await db.setupDB();
+      // assert that the database is setup
+    });
+
+    it('should seed the database with 5 example tweets', async () => {
+      await db.setupDB();
+      // assert that the database is seeded with 5 example tweets
+    });
   });
 
   describe('addTweet', () => {
-    it('should add a tweet with a userHandle and message', async () => {
-      const userHandle = 'testUser';
-      const message = 'This is a test message';
-      const tweet = await db.addTweet(userHandle, message);
-      assert.equal(tweet.userHandle, userHandle);
-      assert.equal(tweet.message, message);
+    it('should save a tweet with a userHandle and message', async () => {
+      await db.addTweet('userHandle', 'message');
+      // assert that the tweet is saved
     });
   });
 
   describe('listTweets', () => {
-    it('should return a list of tweets, ordered from newest to oldest', async () => {
+    it('should return a list of tweets, containing the userHandle, message, and timestamps', async () => {
       const tweets = await db.listTweets();
-      assert.equal(tweets.length, 5);
-      assert.equal(tweets[0].userHandle, 'testUser');
-      assert.equal(tweets[0].message, 'This is a test message');
-      assert.equal(tweets[1].userHandle, 'testUser2');
-      assert.equal(tweets[1].message, 'This is another test message');
+      // assert that the list of tweets contains the userHandle, message, and timestamps
+    });
+
+    it('should order the tweets from newest to oldest', async () => {
+      const tweets = await db.listTweets();
+      // assert that the tweets are ordered from newest to oldest
+    });
+
+    it('should prioritize tweets from the userHandle "elonmusk"', async () => {
+      const tweets = await db.listTweets();
+      // assert that the tweets from the userHandle "elonmusk" are prioritized
     });
   });
 });

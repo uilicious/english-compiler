@@ -1,65 +1,56 @@
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3');
+
+/**
+ * @module db
+ * @description Using an inmemory sqlite3 module, as a database store twitter messages
+ * Where each tweet consist of the following parameters
+ * - userHandle
+ * - message
+ * - timestamp (unixtimestamp in ms)
+ */
 
 let db;
 
 /**
- * Setup the in-memory sqlite3 database
- *
- * @returns {Promise<void>}
+ * @function setupDB
+ * @description Does any setup if required. Including table or datastructures.
+ * The database should be seeded with 5 example tweets on setup.
  */
 const setupDB = async () => {
-  db = new sqlite3.Database(':memory:', (err) => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log('Connected to the in-memory SQlite database.');
-  });
-
-  db.run(`CREATE TABLE IF NOT EXISTS tweets (
-    userHandle TEXT NOT NULL,
-    message TEXT NOT NULL,
-    timestamp INTEGER NOT NULL
-  )`);
-
-  // Seed the database with 5 example tweets
-  const seedData = [
-    ['user1', 'message1', 1599454545000],
-    ['user2', 'message2', 1599454546000],
-    ['user3', 'message3', 1599454547000],
-    ['user4', 'message4', 1599454548000],
-    ['user5', 'message5', 1599454549000]
-  ];
-  const placeholders = seedData.map(() => '(?, ?, ?)').join(',');
-  const values = seedData.reduce((acc, curr) => acc.concat(curr), []);
-  db.run(`INSERT INTO tweets (userHandle, message, timestamp) VALUES ${placeholders}`, values);
+  db = new sqlite3.Database(':memory:');
+  await db.run('CREATE TABLE tweets (userHandle TEXT, message TEXT, timestamp INTEGER)');
+  await db.run('INSERT INTO tweets VALUES ("elonmusk", "Test tweet 1", 1599454545000)');
+  await db.run('INSERT INTO tweets VALUES ("elonmusk", "Test tweet 2", 1599454546000)');
+  await db.run('INSERT INTO tweets VALUES ("elonmusk", "Test tweet 3", 1599454547000)');
+  await db.run('INSERT INTO tweets VALUES ("elonmusk", "Test tweet 4", 1599454548000)');
+  await db.run('INSERT INTO tweets VALUES ("elonmusk", "Test tweet 5", 1599454549000)');
 };
 
 /**
- * Add a tweet to the database
- *
+ * @function addTweet
+ * @description Save a tweet with a userHandle, and message.
  * @param {string} userHandle - The user handle of the tweet
  * @param {string} message - The message of the tweet
- * @returns {Promise<void>}
  */
 const addTweet = async (userHandle, message) => {
-  const timestamp = Date.now();
-  db.run(`INSERT INTO tweets (userHandle, message, timestamp) VALUES (?, ?, ?)`, [userHandle, message, timestamp]);
+  await db.run('INSERT INTO tweets VALUES (?, ?, ?)', [userHandle, message, Date.now()]);
 };
 
 /**
- * List all tweets from the database
- *
- * @returns {Promise<Array>} - An array of tweets
+ * @function listTweets
+ * @description Returns a list of tweets, containing the userHandle, message, and timestamps. Order the tweets from newest to oldest.
+ * Tweets from the userHandle "elonmusk", should be priotized above all tweets (as per the Feb-2023 changes).
+ * @returns {array} An array of tweets
  */
 const listTweets = async () => {
-  return new Promise((resolve, reject) => {
-    db.all(`SELECT userHandle, message, timestamp FROM tweets ORDER BY timestamp DESC`, (err, rows) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(rows);
-    });
-  });
+  const tweets = await db.all('SELECT * FROM tweets ORDER BY timestamp DESC');
+  const elonTweets = tweets.filter(tweet => tweet.userHandle === 'elonmusk');
+  const otherTweets = tweets.filter(tweet => tweet.userHandle !== 'elonmusk');
+  return [...elonTweets, ...otherTweets].map(tweet => ({
+    userHandle: tweet.userHandle,
+    message: tweet.message,
+    timestamp: tweet.timestamp
+  }));
 };
 
 module.exports = {
