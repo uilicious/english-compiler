@@ -23,14 +23,20 @@ For more details, see the 3 minute youtube presentation
 Existing Open AI models, have an upper cap to the size of their input and output.
 This limits their usage to small code snippets as of now.
 
-By using ridiculous amount of impractical prompt chaining and engineering, we work around these limitations, to be able to generate both entire applications across multiple files.
+We work around this limitation, by using ridiculous amount of impractical prompt chaining and engineering. Where we are be able to generate both entire applications across multiple files.
 Or really large (java) files. Or both.
 
 ![Screenshot of a large wall of text and code, to represent how large the oauth2 spec is](./notes/imgs/oauth2-spec-and-code.png)
 > An example of how large the OAuth2 integration specification and code with comment results into
 
-Helping validate the possible future, of AI being a potential new abstraction compiler layer, to existing modern programming language.
-Just as how moden programming languages are an abstract layer to operating system apis, which is in turn is an abstraction to machine code.
+This unfortunately means its a slow process
+
+![Flow chart of the long build processs](./notes/imgs/large-spec-build-process.png)
+
+Where in order to build a large code file, multiple calls to the AI process needs to be done (almost every arrow in the digram, is an AI call)
+
+However, this helps validate the possible future, of AI being a potential new abstraction compiler layer, to existing modern programming language.
+Just as how modern programming languages are an abstract layer to operating system apis, which is in turn is an abstraction to machine code.
 
 # How do I install it?
 
