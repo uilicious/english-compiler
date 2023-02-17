@@ -12,11 +12,9 @@ So what if, instead of writing code from functional specs, we simply compile it 
 > 
 > This is simply a POC. However if you like to take it further, you may give it a try.
 
-For more details, see the youtube link
+For more details, see the 3 minute youtube presentation
 
-[![The English Compiler : in 3 minutes]]
-(https://img.youtube.com/vi/hdPG-avfpZo/maxresdefault.jpg)]
-(https://www.youtube.com/watch?v=hdPG-avfpZo)
+[![The English Compiler : in 3 minutes]](https://img.youtube.com/vi/hdPG-avfpZo/maxresdefault.jpg)](https://www.youtube.com/watch?v=hdPG-avfpZo)
 
 # How do I install it?
 
