@@ -2,7 +2,10 @@
   "name": "english-compiler",
   "version": "1.0.0",
   "description": "POC Compiler, for converting english based markdown specs, into functional code",
-  "main": "index.js",
+  "main": "src/EnglishCompiler.js",
+  "bin": {
+    "english-compiler": "./src/EnglishCompiler.js"
+  },
   "scripts": {
     "test": "mocha \"./src/**/*.test.js\" --exit"
   },
