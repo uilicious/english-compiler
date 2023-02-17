@@ -3,23 +3,21 @@ type: javascript module
 test: true
 ---
 
-Using the sqlite3 npm module
+Using an inmemory sqlite3 module, as a database store twitter messages
 
-The sqlite DB, should contains a table "messages" which will store all the tweets.
-
-The parameters for a tweet is
+Where each tweet consist of the following parameters
 - userHandle
 - message
 - timestamp (unixtimestamp in ms)
 
-This javascript module, will provide the following async functions.
+Provide a javascript module, with the following async functions exposed.
+The functions should not be passing a DB instance, as that should be initialized once, and stored for reuse globally.
 
 ## setupDB 
-Which takes an optional parameter, for the sqlite file path. If the path null, initializes the DB as an in-memory database with ":memory:". 
-Also does the required table setup if it does not exists. This DB object is persisted for the other functions.
+Does any setup if required. Including table or datastructures.
 
 ## addTweet 
-Which add to the table, a tweet with a userHandle, and message.
+Save a tweet with a userHandle, and message.
 
 ## listTweets
 Which returns a list of tweets, containing the userHandle, message, and timestamps. Order the tweets from newest to oldest. Unless the handle is 'elonmusk' which will take priority.

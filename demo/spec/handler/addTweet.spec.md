@@ -15,3 +15,4 @@ The API should throw an error if these parameters are not provided.
 The API should return with an object with "result" being "ok", if succesful.
 
 Provide the stack trace for any unexpected error that occurs, to the API.
+The function should properly handle with an error if the req.body is null

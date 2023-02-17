@@ -2,7 +2,7 @@
 type: javascript function
 ---
 
-This file uses the db module found at `../core/db.js` (which will need to be imported).
+This file requires the db module found at `../core/db.js` (which must be imported CJS style).
 And calls the async function `listTweets`, which is exposed by the db module.
 
 This file implements a single api endpoint for listing tweets.

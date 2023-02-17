@@ -1,31 +1,34 @@
 const express = require('express');
-const db = require('./core/db');
 const addTweetHandler = require('./handler/addTweet');
 const listTweetsHandler = require('./handler/listTweets');
+const db = require('./core/db');
 
 const app = express();
 
 /**
- * Initializes the express server and sets up the routes
- * @returns {Promise} - resolves when the server is ready
+ * Setup express to parse JSON request data
  */
-const initServer = async () => {
-  await db.setupDB();
+app.use(express.json());
 
-  app.post('/api/addTweet', addTweetHandler);
-  app.get('/api/listTweet', listTweetsHandler);
-  app.use(express.static(`${__dirname}/ui`));
+/**
+ * Setup routes for addTweet and listTweets
+ */
+app.post('/api/addTweet', addTweetHandler);
+app.get('/api/listTweets', listTweetsHandler);
 
-  return new Promise((resolve, reject) => {
-    const server = app.listen(8800, err => {
-      if (err) {
-        reject(err);
-      } else {
-        console.log('Server listening on port 8800');
-        resolve(server);
-      }
-    });
+/**
+ * Serve static files from the 'ui' directory
+ */
+app.use(express.static(`${__dirname}/ui`));
+
+/**
+ * Initialize the database and start the server
+ */
+db.setupDB()
+  .then(() => {
+    app.listen(8800);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
   });
-};
-
-module.exports = initServer;

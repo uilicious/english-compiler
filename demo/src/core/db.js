@@ -1,52 +1,61 @@
-const sqlite3 = require('sqlite3');
-
-/**
- * @module db
- * @description Using the sqlite3 npm module, this module provides functions to setup, add, and list tweets from a sqlite database.
- */
+const sqlite3 = require('sqlite3').verbose();
 
 let db;
 
 /**
- * @function setupDB
- * @description Initializes the DB as an in-memory database with ":memory:" or a given file path. Also does the required table setup if it does not exists. This DB object is persisted for the other functions.
- * @param {string} [dbPath=':memory:'] - The optional file path for the sqlite database.
+ * Initializes the in-memory sqlite3 database
+ * @returns {void}
  */
-const setupDB = async (dbPath = ':memory:') => {
-  db = new sqlite3.Database(dbPath);
-  await db.run(`CREATE TABLE IF NOT EXISTS messages (
-    userHandle TEXT,
-    message TEXT,
-    timestamp INTEGER
-  )`);
+const setupDB = async () => {
+  db = new sqlite3.Database(':memory:', (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Connected to the in-memory SQlite database.');
+  });
+
+  db.run('CREATE TABLE IF NOT EXISTS tweets (userHandle TEXT, message TEXT, timestamp INTEGER)', (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+  });
 };
 
 /**
- * @function addTweet
- * @description Adds a tweet with a userHandle and message to the table.
- * @param {string} userHandle - The user handle of the tweet.
- * @param {string} message - The message of the tweet.
+ * Adds a tweet to the database
+ * @param {string} userHandle - The user handle of the tweet
+ * @param {string} message - The message of the tweet
+ * @returns {void}
  */
 const addTweet = async (userHandle, message) => {
-  await db.run(`INSERT INTO messages (userHandle, message, timestamp) VALUES (?, ?, ?)`, [userHandle, message, Date.now()]);
+  const timestamp = Date.now();
+  const sql = `INSERT INTO tweets (userHandle, message, timestamp) VALUES (?, ?, ?)`;
+  const params = [userHandle, message, timestamp];
+  db.run(sql, params, (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+  });
 };
 
 /**
- * @function listTweets
- * @description Returns a list of tweets, containing the userHandle, message, and timestamps. Order the tweets from newest to oldest. Unless the handle is 'elonmusk' which will take priority.
- * @returns {Object[]} An array of objects containing the userHandle, message, and timestamp of the tweets.
+ * Lists all tweets from the database
+ * @returns {array} - An array of tweets
  */
 const listTweets = async () => {
-  const tweets = await db.all(`SELECT userHandle, message, timestamp FROM messages ORDER BY userHandle = 'elonmusk' DESC, timestamp DESC`);
-  return tweets.map(tweet => ({
-    userHandle: tweet.userHandle,
-    message: tweet.message,
-    timestamp: new Date(tweet.timestamp).toISOString()
-  }));
+  let tweets = [];
+  db.all('SELECT * FROM tweets ORDER BY CASE WHEN userHandle = "elonmusk" THEN 0 ELSE 1 END, timestamp DESC', (err, rows) => {
+    if (err) {
+      console.error(err.message);
+    }
+    tweets = rows;
+  });
+
+  return tweets;
 };
 
 module.exports = {
   setupDB,
   addTweet,
-  listTweets
+  listTweets,
 };

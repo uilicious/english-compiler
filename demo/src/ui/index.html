@@ -4,20 +4,12 @@
     <title>Twitter Clone</title>
     <style>
       body {
-        font-family: sans-serif;
+        background-color: #1DA1F2;
       }
       .tweet {
-        margin-bottom: 10px;
-      }
-      .tweet-user {
-        font-weight: bold;
-      }
-      .tweet-message {
-        margin-top: 5px;
-      }
-      .tweet-timestamp {
-        font-size: 0.8em;
-        color: #999;
+        border-radius: 10px;
+        margin: 10px;
+        background-color: #FFFFFF;
       }
     </style>
   </head>
@@ -25,55 +17,45 @@
     <h1>Twitter Clone</h1>
     <div id="tweets"></div>
     <form id="tweetForm">
-      <input type="text" name="userHandle" placeholder="Your user handle" />
-      <input type="text" name="message" placeholder="Your message" />
-      <input type="submit" value="Send" />
+      <input type="text" name="userHandle" placeholder="User Handle" />
+      <input type="text" name="message" placeholder="Message" />
+      <input type="submit" value="Tweet" />
     </form>
     <script>
-      const tweetsEl = document.getElementById('tweets');
-      const tweetFormEl = document.getElementById('tweetForm');
+      const tweetForm = document.getElementById('tweetForm');
+      const tweetsDiv = document.getElementById('tweets');
 
-      // Get tweets
-      const getTweets = async () => {
-        const response = await fetch('/api/listTweets');
-        const { result } = await response.json();
-        tweetsEl.innerHTML = '';
-        result.forEach(tweet => {
-          const tweetEl = document.createElement('div');
-          tweetEl.className = 'tweet';
-          tweetEl.innerHTML = `
-            <div class="tweet-user">${tweet.userHandle}</div>
-            <div class="tweet-message">${tweet.message}</div>
-            <div class="tweet-timestamp">${new Date(tweet.timestamp).toLocaleString()}</div>
-          `;
-          tweetsEl.appendChild(tweetEl);
-        });
-      };
-
-      // Post tweet
-      const postTweet = async (userHandle, message) => {
-        const response = await fetch('/api/addTweet', {
-          method: 'POST',
-          body: JSON.stringify({ userHandle, message })
-        });
-        const { success } = await response.json();
-        if (success) {
-          getTweets();
-        }
-      };
-
-      // Event listeners
-      tweetFormEl.addEventListener('submit', e => {
+      tweetForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const userHandle = e.target.elements.userHandle.value;
-        const message = e.target.elements.message.value;
-        if (userHandle && message) {
-          postTweet(userHandle, message);
+        const userHandle = e.target.userHandle.value;
+        const message = e.target.message.value;
+        if (!userHandle || !message) {
+          alert('Please enter both user handle and message');
+          return;
         }
+        fetch('/api/addTweet', {
+          method: 'POST',
+          body: JSON.stringify({ userHandle, message }),
+        })
+          .then(() => {
+            window.location.reload();
+          });
       });
 
-      // Initialize
-      getTweets();
+      fetch('/api/listTweets')
+        .then((res) => res.json())
+        .then((result) => {
+          result.forEach((tweet) => {
+            const tweetDiv = document.createElement('div');
+            tweetDiv.classList.add('tweet');
+            tweetDiv.innerHTML = `
+              <h3>${tweet.userHandle}</h3>
+              <p>${tweet.message}</p>
+              <span>${new Date(tweet.timestamp).toLocaleString()}</span>
+            `;
+            tweetsDiv.appendChild(tweetDiv);
+          });
+        });
     </script>
   </body>
 </html>
