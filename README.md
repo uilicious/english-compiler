@@ -12,7 +12,11 @@ So what if, instead of writing code from functional specs, we simply compile it 
 > 
 > This is simply a POC. However if you like to take it further, you may give it a try.
 
-@ TODO : Insert video here on the project
+For more details, see the youtube link
+
+[![The English Compiler : in 3 minutes]]
+(https://img.youtube.com/vi/hdPG-avfpZo/maxresdefault.jpg)]
+(https://www.youtube.com/watch?v=hdPG-avfpZo)
 
 # How do I install it?
 
@@ -83,6 +87,8 @@ Go into the `demo/twitter-clone` folder
 
 ![CLI example of building all spec file](./notes/imgs/CLI-build-all.png)
 
+If you want to really check, that it buidls the file feel free to delete the src directory, and run the build process.
+
 ## Demo 2 : Larger java class
 
 This is an example for a java class, which would have been too large, and goes beyond 4000+ tokens once you include the spec and code comments.
@@ -95,3 +101,7 @@ Go into the `demo/java-class` folder
 **Build all spec file**
 
 `EnglishCompiler build all`
+
+## The specification file format
+
+@ TODO
