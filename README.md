@@ -14,7 +14,21 @@ So what if, instead of writing code from functional specs, we simply compile it 
 
 For more details, see the 3 minute youtube presentation
 
-[![The English Compiler : in 3 minutes](https://img.youtube.com/vi/hdPG-avfpZo/maxresdefault.jpg)](https://www.youtube.com/watch?v=hdPG-avfpZo)
+[The English Compiler : in 3 minutes](https://www.youtube.com/watch?v=hdPG-avfpZo)
+
+# How is this "better" then ChatGPT ?
+
+Existing Open AI models, have an upper cap to the size of their input and output.
+This limits their usage to small code snippets as of now.
+
+By using ridiculous amount of impractical prompt chaining and engineering, we work around these limitations, to be able to generate both entire applications.
+Or really large (java) files.
+
+[Screenshot of a large wall of text and code, to represent how large the oauth2 spec is](./notes/imgs/oauth2-spec-and-code.png)
+> An example of how large the OAuth2 integration specification and code with comment results into
+
+Helping validate the possible future, of AI being a potential new abstraction compiler layer, to existing modern programming language.
+Just as how moden programming languages are an abstract layer to operating system apis, which is in turn is an abstraction to machine code.
 
 # How do I install it?
 
@@ -39,6 +53,11 @@ The following is an example of the settings
 
 	// Prompt caching dir, this can be used to cache and speed up the build process
 	// especially when no specification (or code) changes occured
+	//
+	// This cache is also critical, in event that you hit the openAI rate limit 
+	// (or when their server becomes too busy with chatGPT). As it will abort the build.
+	//
+	// Caching the prompts, allow you to continue the build, without starting from scratch.
 	"prompt_cache_dir": "./prompt_cache",
 
 	// Specification directory, to scan for `*.spec.md` files
@@ -55,10 +74,13 @@ The following is an example of the settings
 	"personality": "Sassy & Sarcastic"
 }
 ```
+
 # Run one of our demo !
 
 > Note that the demo, include a precomputed cache of the AI compilation process, so unless you change part of the spec file. You do not need to update the openai key in the settings.
+>
 > Also yes, the output has some minor bugs here and there. This is a Proof-of-concept.
+> I have spent over 4 hours, trying to slowly change the specs, to fix all the bugs. But the write-compile-test loop is just too damn slow.
 
 ## Demo 1 : Building a simple "twitter clone" demo
 
@@ -102,4 +124,3 @@ Go into the `demo/java-class` folder
 
 ## The specification file format
 
-@ TODO
