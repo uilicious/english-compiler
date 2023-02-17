@@ -10,7 +10,7 @@ let db;
 /**
  * @function setupDB
  * @description Initializes the DB as an in-memory database with ":memory:" or a given file path. Also does the required table setup if it does not exists. This DB object is persisted for the other functions.
- * @param {string} [dbPath=':memory:'] - The file path for the sqlite database.
+ * @param {string} [dbPath=':memory:'] - The optional file path for the sqlite database.
  */
 const setupDB = async (dbPath = ':memory:') => {
   db = new sqlite3.Database(dbPath);

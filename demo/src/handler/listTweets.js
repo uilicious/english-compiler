@@ -1,28 +1,33 @@
 /**
- * This file implements a single api endpoint for listing tweets.
+ * listTweets
  *
- * @module listTweet
- * @type {CJS}
+ * This function is used to list all tweets from the database.
+ *
+ * @returns {Promise<Object[]>} An array of objects containing the tweets.
  */
-
-const db = require('../core/db');
+const listTweets = async () => {
+  try {
+    const list = await db.listTweets();
+    return list || [];
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
 
 /**
- * This function is expected to be added as an express.js route.
- * It calls the async function `listTweet`, which is exposed by the db module.
+ * listTweetsHandler
  *
- * @param {Object} req - The request object
- * @param {Object} res - The response object
+ * This function is used to handle the API request for listing tweets.
+ *
+ * @param {Object} req The request object
+ * @param {Object} res The response object
  */
 module.exports = async (req, res) => {
   try {
-    // Get the list of tweets from the db module
-    const list = await db.listTweet() || [];
-
-    // Return the list as a JSON response
+    const list = await listTweets();
     res.json({ result: list });
   } catch (err) {
-    // Log the error and return a 500 status code
     console.error(err);
     res.status(500).json({ error: 'An unexpected error occurred.' });
   }

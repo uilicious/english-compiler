@@ -39,17 +39,17 @@ describe('db', () => {
 
     it('should prioritize tweets from userHandle "elonmusk"', async () => {
       const dbObj = await db.setupDB(null);
-      const userHandle1 = 'elonmusk';
+      const userHandle1 = 'testUser1';
       const message1 = 'test message1';
-      const userHandle2 = 'testUser2';
+      const userHandle2 = 'elonmusk';
       const message2 = 'test message2';
       await db.addTweet(dbObj, userHandle1, message1);
       await db.addTweet(dbObj, userHandle2, message2);
       const tweets = await db.listTweets(dbObj);
-      assert.equal(tweets[0].userHandle, userHandle1);
-      assert.equal(tweets[0].message, message1);
-      assert.equal(tweets[1].userHandle, userHandle2);
-      assert.equal(tweets[1].message, message2);
+      assert.equal(tweets[0].userHandle, userHandle2);
+      assert.equal(tweets[0].message, message2);
+      assert.equal(tweets[1].userHandle, userHandle1);
+      assert.equal(tweets[1].message, message1);
     });
   });
 });
