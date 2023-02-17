@@ -15,10 +15,6 @@ const path = require('path');
  * @return {Array<String>} list of various files, in full absolute path form
  **/
 async function scanDirForFiles( sourcePath, fileNameRegexArr, scanDir = null, excludeDir = [".git"], relativePath = true ) {
-	// Normalize file regex
-	if( fileNameRegexArr == null ) {
-		fileNameRegexArr = [];
-	}
 
 	// resolve sourcpath first
 	sourcePath = path.resolve(sourcePath);
@@ -63,12 +59,15 @@ async function scanDirForFiles( sourcePath, fileNameRegexArr, scanDir = null, ex
 				retArray.push(recursionRes);
 			} else {
 				// Is matching
-				let matching = true;
+				let matching = false;
+				if(fileNameRegexArr == null || fileNameRegexArr.length == 0) {
+					matching = true;
+				}
 				// Check if its a matching file
 				for( const fileRegex of fileNameRegexArr ) {
 					if( fileRegex.test(filename) ) {
 						// Add path the ret array
-						matching = false;
+						matching = true;
 						break;
 					}
 				}
