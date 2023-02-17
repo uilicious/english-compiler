@@ -14,7 +14,7 @@ async function getSpecFile(filepath) {
         return fullpath;
     }
 
-    fullpath = path.resolve(config.spec_dir || "./spec", filepath);
+    fullpath = path.resolve(config.spec_dir, filepath);
     if( await fileExist( fullpath ) ) {
         return fullpath;
     }
@@ -24,7 +24,7 @@ async function getSpecFile(filepath) {
         return fullpath;
     }
 
-    fullpath = path.resolve(config.spec_dir || "./spec", filepath+".spec.md");
+    fullpath = path.resolve(config.spec_dir, filepath+".spec.md");
     if( await fileExist( fullpath ) ) {
         return fullpath;
     }

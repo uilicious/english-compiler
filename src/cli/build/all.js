@@ -37,7 +37,6 @@ module.exports = {
 	run: async (argv, context) => {
 		try {
 			OutputHandler.standardGreen(`[System] Generating code from spec dir : ${config.spec_dir}`)
-			
             const scanList = await scanDirForFiles(config.spec_dir, [/^.*\.spec\.md$/]);
 			
 			if( scanList.length == 0 ) {
@@ -47,19 +46,18 @@ module.exports = {
 
 			let personalityFile = null;
 			if( config.personality ) {
-				let personalityFile = path.resolve(config.spec_dir, "README.md");
+				personalityFile = path.resolve(config.spec_dir, "README.md");
 				if( (await fileExist( personalityFile )) == false ) {
-					personalityFile = scanList[0];
+					personalityFile = path.resolve(config.spec_dir, scanList[0]);
 				}
 				const remark = await personalityRemark(personalityFile, config.personality, "Building everything according to the spec");
 				OutputHandler.standardGreen(`[AI Remark] ${remark}`)
 			}
 
 			for(const specFile of scanList) {
-
 				const fullpath = await getSpecFile(specFile);
 				if( fullpath == null ) {
-					OutputHandler.fatalError(`Invalid spec file path : ${specFile}`, 44);
+					OutputHandler.fatalError(`Invalid spec file path : ${fullpath}`, 44);
 					return;
 				}
 
@@ -105,10 +103,6 @@ module.exports = {
 			}
 			
 			if( config.personality ) {
-				let personalityFile = path.resolve(config.spec_dir, "README.md");
-				if( (await fileExist( personalityFile )) == false ) {
-					personalityFile = scanList[0];
-				}
 				const remark = await personalityRemark(personalityFile, config.personality, "Completing the build process");
 
 				OutputHandler.standardGreen("[System] Completed build for spec dir")

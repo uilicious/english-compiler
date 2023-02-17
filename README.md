@@ -9,7 +9,10 @@ So what if, instead of writing code from functional specs, we simply compile it 
 
 > Does it work? Yes
 > Is it production ready? No
-> This is simply a POC - to demostrate what is possible in the future.
+> 
+> This is simply a POC. However if you like to take it further, you may give it a try.
+
+@ TODO : Insert video here on the project
 
 # How do I install it?
 
