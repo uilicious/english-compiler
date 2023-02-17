@@ -7,6 +7,8 @@ So what if, instead of writing code from functional specs, we simply compile it 
 
 ![CLI help docs for the english](./notes/imgs/EnglishCommand-CLI-help.png)
 
+![Example of spec to code](./notes/imgs/example-spec-to-code.png)
+
 > Does it work? Yes
 > Is it production ready? No
 > 
