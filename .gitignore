@@ -5,6 +5,7 @@ node_modules
 # Ignore the dev config
 config.json
 config.jsonc
+*.jsonc
 
 # Include back git files
 !.git*

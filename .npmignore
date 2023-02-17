@@ -7,3 +7,4 @@ notes/
 demo/
 config.jsonc
 *.jsonc
+**/*.jsonc

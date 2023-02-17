@@ -45,13 +45,13 @@ MainSywac.command("build <subcommand> <args>", {
 //----------------------------------------------------
 
 MainSywac.example("$0 spec suggest spec/OAuth2ProviderHelper", {
-	desc: "Ask the AI, on suggestions for how to improve the specifications. And instruct it to make changes (if you like)"
+	desc: "Ask the AI, for improvement suggestions or instruct it on how to make changes"
 });
 MainSywac.example("$0 build file spec/core/db.spec.md ", {
-	desc: "Builds a single specification file into code (can take over 10 minutes, depending on file size and complexity)"
+	desc: "Builds a single specification file into code \n  (takes >10 minutes, for large complex files) "
 })
 MainSywac.example("$0 build all", {
-	desc: "Scans the currently configured spec folder, for all the spec files - and build it"
+	desc: "Scans the currently configured spec folder, for all the spec files, and build it! \n(for large projects, this can take hours) "
 });
 
 
