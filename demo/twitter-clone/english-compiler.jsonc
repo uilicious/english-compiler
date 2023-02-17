@@ -1,0 +1,22 @@
+{
+	// Openai API key
+	"openai_apikey": "REPLACE-WITH-YOUR-ACTUAL-KEY-AND-DO-NOT-CHECKIN",
+
+	// Prompt caching dir, this can also be used to build up a historical dataset
+	//
+	// This is preconfigured, to allow you to quickly run the demo. However once you make changes
+	// to the specification, you will need to add the openai_apikey
+	"prompt_cache_dir": "./prompt_cache",
+
+	// Specification directory
+	"spec_dir": "./spec",
+
+	// Source code output directory
+	"code_dir": "./src",
+
+	// Test code output directory
+	"test_dir": "./test",
+
+	// Add some personality based remarks
+	"personality": "Sassy & Sarcastic"
+}

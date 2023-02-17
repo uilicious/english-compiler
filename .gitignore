@@ -11,3 +11,6 @@ config.jsonc
 !.git*
 # Add back npmignore
 !.npmignore
+
+# Include the demo config
+!demo/**/english-compiler.jsonc
