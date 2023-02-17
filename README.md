@@ -21,8 +21,8 @@ For more details, see the 3 minute youtube presentation
 Existing Open AI models, have an upper cap to the size of their input and output.
 This limits their usage to small code snippets as of now.
 
-By using ridiculous amount of impractical prompt chaining and engineering, we work around these limitations, to be able to generate both entire applications.
-Or really large (java) files.
+By using ridiculous amount of impractical prompt chaining and engineering, we work around these limitations, to be able to generate both entire applications across multiple files.
+Or really large (java) files. Or both.
 
 ![Screenshot of a large wall of text and code, to represent how large the oauth2 spec is](./notes/imgs/oauth2-spec-and-code.png)
 > An example of how large the OAuth2 integration specification and code with comment results into
@@ -80,7 +80,8 @@ The following is an example of the settings
 > Note that the demo, include a precomputed cache of the AI compilation process, so unless you change part of the spec file. You do not need to update the openai key in the settings.
 >
 > Also yes, the output has some minor bugs here and there. This is a Proof-of-concept.
-> I have spent over 4 hours, trying to slowly change the specs, to fix all the bugs. But the write-compile-test loop is just too damn slow.
+>
+> I have spent over 4 hours, trying to slowly change the specs, and fix all the bugs. But the write-compile-test loop is just too damn slow. And I am out of time for the hackaton.
 
 ## Demo 1 : Building a simple "twitter clone" demo
 
@@ -122,5 +123,47 @@ Go into the `demo/java-class` folder
 
 `EnglishCompiler build all`
 
-## The specification file format
+# What is the specification file format?
 
+The specification folder, should contain `$NAME.spec.md` files that is a 1 to 1 mapping to individual code files.
+
+At minimum it should have a markdown frontmatter, with the `type` parameter, for the language, for example
+
+```
+---
+type: javascript
+test: true
+---
+
+# DB module
+```
+
+`test` is an optional parameter (only supports javascript), that when enabled, will attempt to generate a relevent test script through a seperate process. To avoid contaminating the test code from the source code, this is done in isolation.
+
+From then onwards, the rest is really up to you, on how you want to write your markdown spec
+
+# FAQ 
+
+**Can I use any other language besides English?**
+
+Probably yea, whatever the openAI model support (or future LLM model support) should work in theory
+
+**Instead of writing a spec for each code file, isn't it possible to write a higher level specification file?**
+
+There was some experimentation done on this, but due to time constraints, it was decided to map them in 1-to-1 manner.
+I dun see why not (besides more AI calls), as we can take a similar approach to how we deal with large java classes, by doing a prelimary step of asking the AI how many files it need to make from this one spec file.
+
+**How is this related to Uilicious, or UI testing?**
+
+We built our own AI model for test and code generation, and the original concept for this project was to read product specification, and convert it to UI and unit tests, using our finetuned AI model (technically, we use both a custom finetune model, and OpenAI models, in a prompt chain)
+
+However it was very quickly shown, that it will be too damn slow, and not commercially viable in its current state. So the original internal POC, was subsequently rewritten (removing any confidential code, and keys) to the "English Compiler" for this opensource release during the hackaton.
+
+Sidenote: The OAuth2 specification file, is a real specification file that was written, and used as one of our original internal demos.
+
+**Is it possible, to make this possible?**
+
+Well we are working on it, by trying to build a model that is "not smarter" with more parameters, but is able to have large contextual token memory. 
+This is loosely based on the SalesForce codegen model and dataset ( https://github.com/salesforce/CodeGen ) and The Pile ( https://pile.eleuther.ai/ ) and the xP3 instructional tuning dataset ( https://huggingface.co/datasets/bigscience/xP3 )
+
+We are however on a really tight budget, and are fundraising to help speed things up. First for the use of testing, which has a more immediate practical use and require less contextual memory and code complexity. To eventually codegen in general.
