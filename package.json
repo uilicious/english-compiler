@@ -1,6 +1,6 @@
 {
   "name": "english-compiler",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "POC AI based Compiler, for converting english based markdown specs, into functional code",
   "main": "src/EnglishCompiler.js",
   "bin": {

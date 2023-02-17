@@ -87,8 +87,16 @@ The following is an example of the settings
 
 # Run one of our demo !
 
-> Note that the demo, include a precomputed cache of the AI compilation process, so unless you change part of the spec file. You do not need to update the openai key in the settings.
->
+Note that the demo, include a precomputed cache of the AI compilation process, so unless you change part of the spec file. You do not need to update the openai key in the settings.
+
+All demos, also come preloaded with the specification files
+
+![Example of spec files](./notes/imgs/demo-spec-files.png)
+
+And the prebuilt code output (you can delete, and build again)
+
+![Example of code files](./notes/imgs/demo-code-files.png)
+
 > Also yes, the output has some minor bugs here and there. This is a Proof-of-concept.
 >
 > I have spent over 4 hours, trying to slowly change the specs, and fix all the bugs. But the write-compile-test loop is just too damn slow. And I am out of time for the hackaton.
