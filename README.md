@@ -9,8 +9,8 @@ So what if, instead of writing code from functional specs, we simply compile it 
 
 ![Example of spec to code](./notes/imgs/example-spec-to-code.png)
 
-> Does it work? Yes
-> Is it production ready? No
+> Does it work? Yes  
+> Is it production ready? No  
 > 
 > This is simply a POC. However if you like to take it further, you may give it a try.
 
