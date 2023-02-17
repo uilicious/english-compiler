@@ -187,6 +187,7 @@ This is loosely based on
 - The Pile ( https://pile.eleuther.ai/ ) 
 - EleutherAI 20B ( https://blog.eleuther.ai/announcing-20b/ ) 
 - xP3 instructional tuning dataset ( https://huggingface.co/datasets/bigscience/xP3 )
+- (to add) The Stack ( https://huggingface.co/datasets/bigcode/the-stack )
 
 We are however on a really tight budget, and are fundraising to help speed things up. 
 First for the use of testing, which has a more immediate practical use and require less contextual memory and code complexity (AKA can use an inferior model). To eventually codegen in general.
