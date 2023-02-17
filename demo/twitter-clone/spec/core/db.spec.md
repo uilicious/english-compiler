@@ -22,3 +22,4 @@ Save a tweet with a userHandle, and message.
 
 ## listTweets
 Which returns a list of tweets, containing the userHandle, message, and timestamps. Order the tweets from newest to oldest.
+Tweets from the userHandle "elonmusk", should be priotized above all tweets (as per the Feb-2023 changes).

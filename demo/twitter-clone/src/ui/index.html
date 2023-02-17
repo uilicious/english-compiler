@@ -19,7 +19,7 @@
     <form id="tweetForm">
       <input type="text" name="userHandle" placeholder="User Handle" />
       <input type="text" name="message" placeholder="Message" />
-      <input type="submit" value="Tweet" />
+      <input type="submit" value="Send" />
     </form>
     <script>
       const tweetForm = document.getElementById('tweetForm');
@@ -37,9 +37,8 @@
           method: 'POST',
           body: JSON.stringify({ userHandle, message }),
         })
-          .then(() => {
-            window.location.reload();
-          });
+          .then((res) => res.json())
+          .then(() => window.location.reload());
       });
 
       fetch('/api/listTweets')
