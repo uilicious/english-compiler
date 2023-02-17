@@ -61,7 +61,7 @@ async function specToMinifiedBaseCode( classSpec ) {
 	let g1_minified = await codeMinify(g1_codegen, classSpec);
 
 	// Token length safety
-	if( getTokenCount(g1_minified) > 1000 ) {
+	if( getTokenCount(g1_minified) > 1500 ) {
 		throw "[[Token Limit Error]] Gen 1 draft of the minified base code, exceeds a 1,000 tokens - consider reducing and splitting the class : "+name;
 	}
 
@@ -91,7 +91,7 @@ async function specToMinifiedBaseCode( classSpec ) {
 	let g2_minified = await codeMinify(g2_codegen, classSpec);
 
 	// Token length safety
-	if( getTokenCount(g2_minified) > 1000 ) {
+	if( getTokenCount(g2_minified) > 1500 ) {
 		throw "[[Token Limit Error]] Gen 2 draft of the minified base code, exceeds a 1,000 tokens - consider reducing and splitting the class : "+name;
 	}
 	return g2_minified;
