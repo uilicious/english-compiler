@@ -91,7 +91,7 @@ module.exports = {
 			} 
 
 			if( confirmRes ) {
-				await fs.promises.writeFile( fullpath, originalMd.frontmatter+updatedSpec );
+				await fs.promises.writeFile( fullpath, originalMd.frontmatter+"\n"+updatedSpec );
 			}
 		} catch(err) {
 			OutputHandler.fatalError(err, 51);

@@ -1,1 +1,1 @@
-module.exports = "1.0.2-alpha"
+module.exports = "1.0.3-POC"

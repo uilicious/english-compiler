@@ -33,7 +33,7 @@ The following is an example of the settings
 ```.json
 {
 	// Openai API key
-	"openai_apikey": "REPLACE-WITH-YOUR-ACTUAL-KEY-DO-NOT-CHECKIN",
+	"openai_apikey": "REPLACE-WITH-YOUR-ACTUAL-KEY-AND-DO-NOT-CHECKIN",
 
 	// Prompt caching dir, this can be used to cache and speed up the build process
     // especially when no specification (or code) changes occured
@@ -53,3 +53,14 @@ The following is an example of the settings
 	"personality": "Sassy & Sarcastic"
 }
 ```
+# Run one of our demo !
+
+> Note that the demo, include a precomputed cache of the AI compilation process, so unless you change part of the spec file. You do not need to update the openai key in the settings.
+
+## Demo 1 : Building a simple "twitter clone" demo
+
+Go into the `demo/java-class` folder
+
+**Ask the AI for suggestions on a spec file**
+
+`EnglishCompiler spec suggest spec/ui/index.spec.md`
