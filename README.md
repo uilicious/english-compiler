@@ -14,7 +14,7 @@ So what if, instead of writing code from functional specs, we simply compile it 
 
 For more details, see the 3 minute youtube presentation
 
-[The English Compiler : in 3 minutes](https://www.youtube.com/watch?v=hdPG-avfpZo)
+[![The English Compiler : in 3 minutes](./notes/imgs/yotube-thumbnail.png)](https://www.youtube.com/watch?v=hdPG-avfpZo)
 
 # How is this "better" then ChatGPT ?
 
