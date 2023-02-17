@@ -39,8 +39,8 @@ module.exports = {
 			OutputHandler.standardGreen("### "+config.spec_dir);
 			OutputHandler.standardGreen("### ---")
 
-            const scanList = await scanDirForFiles(config.spec_dir, [/^.*\\.spec\\.md$/]);
-
+            const scanList = await scanDirForFiles(config.spec_dir, [/^.*\.spec\.md$/]);
+			console.log(scanList);
 			for(const specFile of scanList) {
 
 				const fullpath = await getSpecFile(specFile);
