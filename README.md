@@ -152,16 +152,16 @@ From then onwards, the rest is really up to you, on how you want to write your m
 
 # FAQ 
 
-**Can I use any other language besides English?**
+### Can I use any other language besides English?
 
 Probably yea, whatever the openAI model support (or future LLM model support) should work in theory
 
-**Instead of writing a spec for each code file, isn't it possible to write a higher level specification file?**
+### Instead of writing a spec for each code file, isn't it possible to write a higher level specification file?
 
 There was some experimentation done on this, but due to time constraints, it was decided to map them in 1-to-1 manner.
 I dun see why not (besides more AI calls), as we can take a similar approach to how we deal with large java classes, by doing a prelimary step of asking the AI how many files it need to make from this one spec file.
 
-**How is this related to Uilicious, or UI testing?**
+### How is this related to Uilicious, or UI testing?
 
 We built our own AI model for test and code generation, and the original concept for this project was to read product specification, and convert it to UI and unit tests, using our finetuned AI model (technically, we use both a custom finetune model, and OpenAI models, in a prompt chain)
 
@@ -169,9 +169,13 @@ However it was very quickly shown, that it will be too damn slow, and not commer
 
 Sidenote: The OAuth2 specification file, is a real specification file that was written, and used as one of our original internal demos.
 
-**Is it possible, to make this possible?**
+### Is it possible, to make this possible?
 
 Well we are working on it, by trying to build a model that is "not smarter" with more parameters, but is able to have large contextual token memory. 
-This is loosely based on the SalesForce codegen model and dataset ( https://github.com/salesforce/CodeGen ) and The Pile ( https://pile.eleuther.ai/ ) and the xP3 instructional tuning dataset ( https://huggingface.co/datasets/bigscience/xP3 )
+This is loosely based on 
+- SalesForce codegen model and dataset ( https://github.com/salesforce/CodeGen )  
+- The Pile ( https://pile.eleuther.ai/ ) 
+- EleutherAI 20B ( https://blog.eleuther.ai/announcing-20b/ ) 
+- xP3 instructional tuning dataset ( https://huggingface.co/datasets/bigscience/xP3 )
 
 We are however on a really tight budget, and are fundraising to help speed things up. First for the use of testing, which has a more immediate practical use and require less contextual memory and code complexity. To eventually codegen in general.
