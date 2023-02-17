@@ -14,7 +14,7 @@ So what if, instead of writing code from functional specs, we simply compile it 
 
 For more details, see the 3 minute youtube presentation
 
-[![The English Compiler : in 3 minutes](./notes/imgs/yotube-thumbnail.png)](https://www.youtube.com/watch?v=hdPG-avfpZo)
+[![The English Compiler : in 3 minutes](./notes/imgs/youtube-thumbnail.png)](https://www.youtube.com/watch?v=hdPG-avfpZo)
 
 # How is this "better" then ChatGPT ?
 
@@ -24,7 +24,7 @@ This limits their usage to small code snippets as of now.
 By using ridiculous amount of impractical prompt chaining and engineering, we work around these limitations, to be able to generate both entire applications.
 Or really large (java) files.
 
-[Screenshot of a large wall of text and code, to represent how large the oauth2 spec is](./notes/imgs/oauth2-spec-and-code.png)
+![Screenshot of a large wall of text and code, to represent how large the oauth2 spec is](./notes/imgs/oauth2-spec-and-code.png)
 > An example of how large the OAuth2 integration specification and code with comment results into
 
 Helping validate the possible future, of AI being a potential new abstraction compiler layer, to existing modern programming language.
