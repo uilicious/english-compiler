@@ -15,9 +15,10 @@ The functions should not be passing a DB instance, as that should be initialized
 
 ## setupDB 
 Does any setup if required. Including table or datastructures.
+The database should be seeded with 5 example tweets on setup.
 
 ## addTweet 
 Save a tweet with a userHandle, and message.
 
 ## listTweets
-Which returns a list of tweets, containing the userHandle, message, and timestamps. Order the tweets from newest to oldest. Unless the handle is 'elonmusk' which will take priority.
+Which returns a list of tweets, containing the userHandle, message, and timestamps. Order the tweets from newest to oldest.
