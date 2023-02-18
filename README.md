@@ -1,5 +1,7 @@
 # The English Compiler
 
+> English is all you need
+
 We know that all great™ projects start with awesome™ detailed functional specifications.
 Which is typically written in [English](https://esolangs.org/wiki/English), or its many other spoken language alternatives.
 
@@ -199,3 +201,12 @@ This is loosely based on
 
 We are however on a really tight budget, and are fundraising to help speed things up. 
 First for the use of testing, which has a more immediate practical use and require less contextual memory and code complexity (AKA can use an inferior model). To eventually codegen in general.
+
+### Such an inefficent compiler, can't possibly ever be useful
+
+Well you are probably right, for its current iteration. It has bugs, and may fail to compile, when chatGPT is overloaded.
+
+But the last time I worked on "useless compiler" 5 years ago, that was never meant for production usage. [GPU.js](https://gpu.rocks/#/)
+It ended up running entire neural networks, and digital art installations, on thousands of browsers.
+
+The original [GPU.js](https://github.com/gpujs/gpu.js) compiler was no different, and equally broken. Or technically worse (it was only compatible with some GPUs)
