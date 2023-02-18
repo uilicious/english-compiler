@@ -43,7 +43,9 @@ This unfortunately means its a slow process
 
 Where in order to build a large code file, multiple calls to the AI process needs to be done (almost every arrow in the digram, is an AI call)
 
-However, this helps validate the possible future, of AI being a potential new abstraction compiler layer, to existing modern programming language.
+**If the chart does not make it clear, having 10+ AI calls per file: this giant process is slow as ass**
+
+But the point is not in its practicality, but validating the practicality of a possible future. Where the AI is a potential new abstraction compiler layer, to existing modern programming language.
 Just as how modern programming languages are an abstract layer to operating system apis, which is in turn is an abstraction to machine code.
 
 # How do I install it?
