@@ -9,7 +9,13 @@ Into a future, where we replace nearly everything, with just written text.
 
 ![CLI help docs for the english](./notes/imgs/EnglishCommand-CLI-help.png)
 
-![Example of spec to code](./notes/imgs/example-spec-to-code.png)
+On a smaller scale, instead of generating giant class files, it can convert smaller specifications like the following
+
+![Twitter db example spec](./notes//imgs/twitter-db-spec.png)
+
+Into the following code
+
+![Twitter db example code](./notes/imgs/twitter-db-code.png)
 
 > Does it work? Yes  
 > Is it production ready? No  
@@ -39,14 +45,6 @@ Where in order to build a large code file, multiple calls to the AI process need
 
 However, this helps validate the possible future, of AI being a potential new abstraction compiler layer, to existing modern programming language.
 Just as how modern programming languages are an abstract layer to operating system apis, which is in turn is an abstraction to machine code.
-
-On a smaller scale, instead of generating giant class files, it can convert smaller specifications like the following
-
-![Twitter db example spec](./notes//imgs/twitter-db-spec.png)
-
-Into the following code
-
-![Twitter db example code](./notes/imgs/twitter-db-code.png)
 
 # How do I install it?
 
