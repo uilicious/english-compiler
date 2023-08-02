@@ -1,3 +1,5 @@
+> PS: The successor to this project is smol-dev-js : https://github.com/PicoCreator/smol-dev-js
+
 # The English Compiler
 
 > English is all you need
