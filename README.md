@@ -138,7 +138,7 @@ Go into the `demo/twitter-clone` folder
 
 ![CLI example of building all spec file](./notes/imgs/CLI-build-all.png)
 
-If you want to really check, that it buidls the file feel free to delete the src directory, and run the build process.
+If you want to really check, that it builds the file feel free to delete the src directory, and run the build process.
 
 ## Demo 2 : Larger java class
 
